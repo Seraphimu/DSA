@@ -29,12 +29,18 @@ public:
     void ArrayDeletePrePos(int Pos);
 
     //排序方法
-    void BubbleSort();
-    void SelectionSort();
+    void ArrayBubbleSort();
+    void ArraySelectionSort();
     // 快速排序
-    void QucklySort();
+    void ArrayQuicklySort();
     void QSort(DataType A[], int Low, int High);
     int Partition(DataType A[], int Low, int High);
+
+    //查找方法
+    //查找下标为Pos的元素
+    DataType ArraySearchByPos(int Pos);
+    //返回欲查找元素的下标，若不存在，则返回-1
+    int SearchByValue(DataType X);
 
     //辅助方法
     void ArrayInit();
@@ -42,7 +48,7 @@ public:
     void ArrayIsFull();
     void ArrayIsEmpty();
     void ArrayPosInsertErr(int Pos);
-    void ArrayPosDeleteErr(int Pos);
+    void ArrayPosErr(int Pos);
     void Swap(int & a, int & b);
 };
 
@@ -104,7 +110,7 @@ void Array::ArrayInsertPrePos(int Pos, DataType X) {
 
 void Array::ArrayDeleteThisPos(int Pos) {
     ArrayIsEmpty();
-    ArrayPosDeleteErr(Pos);
+    ArrayPosErr(Pos);
     // 当Pos = Size时调用函数，确实会出现把最后一位删除的情况，但是这不符合预期，因为Size下标是末位的后一位，
     //看到把最后一位删除的效果仅仅是最后一步的Size--在发挥作用而已
     // ArrayPosInsertErr(Pos);
@@ -137,7 +143,7 @@ void Array::ArrayPopFront() {
 }
 
 
-void Array::BubbleSort() {
+void Array::ArrayBubbleSort() {
     int i, j;
     for (i = 0; i < Size - 1; i++) {
         //遍历未排序区
@@ -149,7 +155,7 @@ void Array::BubbleSort() {
     }
 }
 
-void Array::SelectionSort() {
+void Array::ArraySelectionSort() {
     int i, j;
     int MinIndex;
     //遍历0到N
@@ -207,8 +213,29 @@ void Array::QSort(DataType A[], int Low, int High) {
 
 }
 
-void Array::QucklySort() {
+void Array::ArrayQuicklySort() {
     Array::QSort(A, 0, Size - 1);
+}
+
+DataType Array::ArraySearchByPos(int Pos) {
+    ArrayIsEmpty();
+    ArrayPosErr(Pos);
+
+    return A[Pos];
+}
+
+int Array::SearchByValue(DataType X) {
+    ArrayIsEmpty();
+    
+    int i;
+    for (i = 0; i < Size; i++) {
+        if (X == A[i]) {
+            return i;
+        }
+    }
+    
+    //出循环就是没找到
+    return -1;
 }
 
 void Array::Swap(int & a, int & b) {
@@ -252,7 +279,7 @@ void Array::ArrayPosInsertErr(int Pos) {
     }
 }
 
-void Array::ArrayPosDeleteErr(int Pos) {
+void Array::ArrayPosErr(int Pos) {
     //删除是不能删除最后一个元素的后一位的，
     //所以在ArrayPosInsertErr()方法中没有考虑到的末位在该函数中将被考虑
     if (Pos == Size) {
@@ -316,8 +343,10 @@ void Test() {
     // a.ArrayPopFront();
     // a.ArrayPopFront();
 
-    a.SelectionSort();
-    a.QucklySort();
+    // a.ArraySelectionSort();
+    // a.ArrayQuicklySort();
+
+    cout << a.ArraySearchByPos(5) << endl;
 
     a.ArrayPrint();
 }
