@@ -40,7 +40,21 @@ public:
     //查找下标为Pos的元素
     DataType ArraySearchByPos(int Pos);
     //返回欲查找元素的下标，若不存在，则返回-1
-    int SearchByValue(DataType X);
+    int ArraySearchByValue(DataType X);
+
+    // 查找特殊值
+    DataType ArrayFindMaxByLoop();
+    DataType ArrayFindMaxBySort();
+    DataType ArrayFindMinByLoop();
+    DataType ArrayFindMinBySort();
+
+
+    // 修改方法
+    // 根据下标自发
+    void ArrayModifyByPos(int Pos, DataType X);
+    // 如果该值在数组中，则修改；
+    // 若无，返回 -1
+    void ArrayModifyByValue(DataType SourceX, DataType X);
 
     //辅助方法
     void ArrayInit();
@@ -224,9 +238,8 @@ DataType Array::ArraySearchByPos(int Pos) {
     return A[Pos];
 }
 
-int Array::SearchByValue(DataType X) {
+int Array::ArraySearchByValue(DataType X) {
     ArrayIsEmpty();
-    
     int i;
     for (i = 0; i < Size; i++) {
         if (X == A[i]) {
@@ -237,6 +250,58 @@ int Array::SearchByValue(DataType X) {
     //出循环就是没找到
     return -1;
 }
+
+DataType Array::ArrayFindMaxByLoop() {
+    ArrayIsEmpty();
+    int i;
+    int MaxIndex = 0;
+    for (i = 0; i < Size; i++) {
+        if (A[MaxIndex] < A[i]) {
+            MaxIndex = i;
+        }
+    }
+
+    return A[MaxIndex];
+}
+
+DataType Array::ArrayFindMaxBySort() {
+    //使用任意一种排序算法
+    ArrayIsEmpty();
+    ArrayQuicklySort();
+    return A[Size - 1];
+}
+
+DataType Array::ArrayFindMinByLoop() {
+    ArrayIsEmpty();
+    int i;
+    int MinIndex = 0;
+    for (i = 0; i < Size; i++) {
+        if (A[MinIndex] > A[i]) {
+            MinIndex = i;
+        }
+    }
+
+    return A[MinIndex];
+}
+DataType Array::ArrayFindMinBySort() {
+    ArrayIsEmpty();
+    ArrayQuicklySort();
+    return A[0];
+}
+
+void Array::ArrayModifyByPos(int Pos, DataType X) {
+    ArrayIsEmpty();
+    ArrayPosErr(Pos);
+
+    A[Pos] = X;
+}
+
+void Array::ArrayModifyByValue(DataType SourceX, DataType X) {
+    int Pos = ArraySearchByValue(SourceX);
+
+    A[Pos] = X;
+}
+
 
 void Array::Swap(int & a, int & b) {
     int Tmp = a;
@@ -308,9 +373,9 @@ void Test() {
     a.ArrayPushBack(1);
     a.ArrayPushBack(1);
     a.ArrayPushBack(4);
-    a.ArrayPushBack(5);
+    a.ArrayPushBack(-5);
     a.ArrayPushBack(1);
-    a.ArrayPushBack(4);
+    a.ArrayPushBack(-4);
 
     // a.ArrayPushFront(1);
     // a.ArrayPushFront(1);
@@ -346,7 +411,18 @@ void Test() {
     // a.ArraySelectionSort();
     // a.ArrayQuicklySort();
 
-    cout << a.ArraySearchByPos(5) << endl;
+    // cout << a.ArraySearchByPos(5) << endl;
+    // cout << a.ArrayFindMaxByLoop() << endl;
+    // cout << a.ArrayFindMaxBySort() << endl;
+
+    // cout << a.ArrayFindMinByLoop() << endl;
+    // cout << a.ArrayFindMinBySort() << endl;
+    
+    // a.ArrayModifyByPos(3, 114514);
+    // a.ArrayModifyByPos(6, 114514);
+    a.ArrayModifyByValue(1, 140);
+
+
 
     a.ArrayPrint();
 }
