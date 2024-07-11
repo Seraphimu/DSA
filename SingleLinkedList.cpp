@@ -15,9 +15,9 @@ typedef struct Node {
 typedef class SingleLinkedList {
 public:
     Node * SLHead; 
-    //初始化，建立空表
+    //初始化，建立空表，初始化头指针为空指针
     void SLInit();
-    //分配空间
+    //分配空间，成功返回节点指针，失败返回空指针
     Node * SLBuyNode(DataType X);
 
     //插入方法
@@ -41,10 +41,12 @@ public:
     void SLModifyByValue(DataType NowValue, DataType NewValue);
     //查找方法
     Node * SLSearchByValue(DataType Value);
+    Node * SLSearchByPos(int Pos);
 
     //辅助方法
     //判空：如果为空返回true，反之返回false
     bool SLIsEmpty();
+    int SLLength();
     //判断下标是否合法：不合法返回true，合法返回false
     bool SLPosErr(Node * Pos);
     void SLPrint();
@@ -187,6 +189,22 @@ void SL::SLInsertPos(Node * Pos, DataType X) {
     }
 }
 
+Node * SL::SLSearchByPos(int Pos) {
+    int i;
+    Node * Cur;
+    for (i = 0, Cur = SLHead; i < Pos && Cur; i++, Cur = Cur->Next) {
+        ;
+    }
+
+    if (i == Pos) {
+        return Cur;
+    }
+    else {
+        cout << "Pos is not Exist!" << endl;
+        return nullptr;
+    }
+}
+
 
 bool SL::SLIsEmpty() {
     return SLHead == nullptr;
@@ -222,6 +240,17 @@ bool SL::SLPosErr(Node * Pos) {
     return true;
 }
 
+int SL::SLLength() {
+    int i = 0;
+    Node * Cur = SLHead;
+    while (Cur) {
+        Cur = Cur->Next;
+        i++;
+    }
+
+    return i;
+}
+
 
 void Test() {
     SL pl;
@@ -250,12 +279,12 @@ void Test() {
     // pl.SLInsertPos(pl.SLHead->Next + sizeof (pl), 114514);
 
     // cout << pl.SLSearchByValue(1145) << endl;;
-    pl.SLModifyByValue(1145, 114514);
+    // pl.SLModifyByValue(1145, 114514);
     // pl.SLModifyByValue(5, 114514);
-
+    cout << pl.SLLength() << endl;
+    cout << pl.SLSearchByPos(5)->A << endl;
+    cout << pl.SLSearchByPos(45) << endl;
     pl.SLPrint();
-
-
     // pl.SLInsertPos(pl.SLHead->Next->Next, 114514);
     // pl.SLInsertPos(pl.SLHead, 114514);
 
@@ -263,9 +292,6 @@ void Test() {
     // pl.SLPopFront();
     // pl.SLPopFront();
     // pl.SLPopFront();
-
-    pl.SLPrint();
-
 }
 
 
