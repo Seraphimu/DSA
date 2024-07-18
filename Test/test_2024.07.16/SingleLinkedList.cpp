@@ -198,6 +198,3 @@ int SL::SLLength() {
 
     return i;
 }
-
-
-
