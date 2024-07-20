@@ -43,4 +43,15 @@ public:
     void Print();
     //分配空间，根据参数X分配空间，分配成功则返回该节点的指针
     Node * BuyNode(DataType X);
+    Node * GetHead();
+
+
+    //算法题：
+    //反转链表，返回反转后的链表
+    Node * ReservedList();
+    //删除给定节点，但是不允许访问头指针
+    void DeleteNode(Node * Target);
+    //合并两个链表
+    Node * MergeInBetween(Node * ListA, Node * ListB, int a, int b);
+    Node * MergeSeq(SingleLinkedList *& ListA, SingleLinkedList *& ListB);
 };

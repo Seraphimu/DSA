@@ -193,3 +193,221 @@ void SingleLinkedList::ModifyByValue(DataType Target, DataType NewValue) {
     
     Ret->A = NewValue;
 }
+
+Node * SingleLinkedList::GetHead() {
+    return Head;
+}
+
+Node * SingleLinkedList::ReservedList() {
+    if (IsEmpty()) {
+        cout << "List Is Empty!\n";
+        exit(-1);
+    }
+
+    Node * p = nullptr;
+    Node * q = Head;
+    Node * tmp = q->Next;
+
+    while (tmp != nullptr) {
+        q->Next = p;
+        p = q;
+        q = tmp;
+        tmp = tmp->Next;
+    }
+
+    q ->Next = p;
+
+    Head = q;
+
+    return q;
+}
+
+void SingleLinkedList::DeleteNode(Node * Target) {
+    if (Head == nullptr) {
+        cout << "List Is Empty!\n";
+        exit(-1);
+    }
+    if (Target == nullptr) {
+        cout << "Target is nullptr!\n";
+        exit(-1);
+    }
+
+    //只有一个节点的时候
+    if (Target = Head) {
+        delete Target;
+        Target == nullptr;
+    }
+    //有多个节点的时候
+    else {
+        Node * Tmp = Target->Next;
+        Target->A = Tmp->A;
+        Target->Next = Tmp->Next;
+    }
+}
+
+//删除ListA的一部分，并把ListB接入
+//思路：找到ListA删除端点a和b的前驱和后继，然后对链表A进行释放操作，再把链表B接入链表A
+Node * SingleLinkedList::MergeInBetween(Node * ListA, Node * ListB, int a, int b) {
+    if (IsEmpty()) {
+        cout << "List Is Empty!\n";
+        exit(-1);
+    }
+
+    Node * Cur = nullptr;
+    Node * aPrev = nullptr;
+    Node * bNext = nullptr;
+
+    int i = 0;
+    //踩坑，这个地方应该使用闭区间遍历，a和b都是下标
+    for (i = 0, Cur = ListA; i <= b && Cur != nullptr; i++, Cur = Cur->Next) {
+        //保存第a个节点的前驱
+        if (a - 1 == i) {
+            aPrev = Cur;
+        }
+        //保存第b个节点的后继
+        if (b == i) {
+            bNext = Cur->Next;
+        }
+    }
+
+    //决断a和b的下标合法性
+    //循环结束时i<b，则必定是下标不合法，即使a合法，但是b不合法，也一样无法进行操作
+    if (i < b && Cur == nullptr) {
+        cout << "Index is Not Exist!\n";
+        exit(-1);
+    }
+
+    //释放节点
+    Node * Tmp = nullptr;
+    //释放错了
+    // Cur = ListA;
+    Cur = aPrev->Next;
+    while (Cur != bNext) {
+        Tmp = Cur;
+        Cur = Cur->Next;
+        delete Tmp;
+        Tmp = nullptr;
+    }
+
+    //ListA的前半部分连接ListB
+    aPrev->Next = ListB;
+    // aPrev = ListB;       //接错了
+    //遍历到ListB的尾节点，并连接ListA的剩余部分
+    Cur = ListB;
+    while (Cur->Next != nullptr) {
+        Cur = Cur->Next;
+    }
+
+    Cur->Next = bNext;
+
+    //返回合并后的链表
+    return ListA;
+}
+
+// Node * SingleLinkedList::MergeSeq(Node * ListA, Node * ListB) {
+//     if (ListA == nullptr) {
+//         return ListB;
+//     }
+//     if (ListB == nullptr) {
+//         return ListA;
+//     }
+
+//     Node * Cur1 = ListA;
+//     Node * Cur2 = ListB;
+//     Node * Tmp = nullptr;
+//     //遍历表2
+//     while (Cur2 != nullptr) {
+//         while (Cur1 != nullptr) {
+//             //插入元素到最左边（头插）
+//             //表2的元素大于等于表1中的
+//             if (Cur2->A < Cur1->A && Cur1 == Head) {
+//                 Tmp = Cur2;
+//                 Cur2 = Cur2->Next;
+
+//                 Tmp->Next = ListA;
+//                 ListA = Tmp;
+//                 //重置索引至表头
+//                 Cur1 = ListA;
+//             }
+//             //表1走到头了
+//             else if (Cur2->A > Cur1->A && Cur1->Next == nullptr) {
+//                 Cur1->Next = Cur2;
+//                 break;
+//             }
+//             //非递减排序插入
+//             else if (Cur2->A >= Cur1->A && Cur2->A <= Cur1->Next->A) {
+//                 //临时保存
+//                 Tmp = Cur2;
+//                 //Cur2后移一位
+//                 Cur2 = Cur2->Next;
+//                 //插入节点
+//                 Tmp->Next = Cur1->Next;
+//                 Cur1->Next = Tmp;
+//             }
+
+//             Cur1->Next;
+//         }
+
+//         //注意这里的变化，不需要
+//         // Cur2 = Cur2->Next;
+//     }
+
+//     return nullptr;
+// }
+
+Node * SingleLinkedList::MergeSeq(SingleLinkedList *& ListA, SingleLinkedList *& ListB) {
+    if (ListA->GetHead() == nullptr) {
+        return ListB->GetHead();
+    }
+    if (ListB->GetHead() == nullptr) {
+        return ListA->GetHead();
+    }
+
+    //用一个新链表比较两个链表的值
+    SingleLinkedList * ListC = new SingleLinkedList();
+    ListC->Init();
+
+    while (ListA->Head != nullptr) {
+        while (ListB->Head != nullptr) {
+            if (ListB->Head == nullptr) {
+                break;
+            }
+            //比较两个链表里边的值，小的放C里，然后删除
+            if (ListA->Head->A <= ListB->Head->A) {
+                ListC->PushBack(ListA->Head->A);
+                ListA->PopFront();
+            }
+            else {
+                ListC->PushBack(ListB->Head->A);
+                ListB->PopFront();
+            }
+        }
+        if (ListA->Head == nullptr) {
+            break;
+        }
+    }
+
+    //遍历ListC，找到尾节点，插入剩余的表
+    if (ListA->Head == nullptr) {
+        Node * Tmp = ListC->Head;
+        while (Tmp->Next != nullptr) {
+            Tmp = Tmp->Next;
+        }
+
+        //接入链表
+        Tmp->Next = ListB->Head;
+
+    }
+    
+    if (ListB->Head == nullptr) {
+        Node * Tmp = ListC->Head;
+        while (Tmp->Next != nullptr) {
+            Tmp = Tmp->Next;
+        }
+
+        //接入链表
+        Tmp->Next = ListA->Head;
+
+    }
+    return ListC->Head;
+}

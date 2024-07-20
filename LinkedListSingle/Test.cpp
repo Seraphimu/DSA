@@ -43,8 +43,89 @@ void TestSingleLinkedList() {
     SL.MakeEmpty();
 }
 
+
+void TestReserved() {
+    SingleLinkedList * SL = new SingleLinkedList();
+
+    SL->Init();
+    // SL->PushBack(1);
+    // SL->PushBack(2);
+    // SL->PushBack(3);
+    // SL->PushBack(4);
+    // SL->PushBack(5);
+    // SL->PushBack(6);
+    for (int i = 0; i < 114; i++) {
+        SL->PushBack(i);
+    }
+    cout << "before reserved: \n";
+    SL->Print();
+    SL->ReservedList();
+    cout << "after reserved: \n";
+    SL->Print();
+}
+
+void TestMergeTwoList() {
+    //创建两个链表
+    SingleLinkedList * ListA = new SingleLinkedList();
+    SingleLinkedList * ListB = new SingleLinkedList();
+
+    ListA->Init();
+    ListB->Init();
+
+    ListA->PushBack(1);
+    ListA->PushBack(2);
+    ListA->PushBack(3);
+    ListA->PushBack(4);
+    ListA->PushBack(5);
+    ListA->PushBack(6);
+
+    ListB->PushBack(114);
+    ListB->PushBack(514);
+    ListB->PushBack(114514);
+    ListB->PushBack(1919810);
+
+
+    //合并前
+    cout << "before merge: \n";
+    ListA->Print();
+
+    //合并后
+    cout << "after merge: \n";
+    ListA->MergeInBetween(ListA->GetHead(), ListB->GetHead(), 2, 5);
+    ListA->Print();
+}
+
+
+void TestMergeSeq() {
+    SingleLinkedList * ListA = new SingleLinkedList();
+    SingleLinkedList * ListB = new SingleLinkedList();
+
+    ListA->Init();
+    ListB->Init();
+
+    ListA->PushBack(1);
+    ListA->PushBack(1);
+    ListA->PushBack(4);
+    ListA->PushBack(5);
+
+    ListB->PushBack(0);
+    ListB->PushBack(0);
+    ListB->PushBack(1);
+    ListB->PushBack(6);
+    ListB->PushBack(6);
+
+    ListA->MergeSeq(ListA, ListB);
+
+    ListA->Print();
+}
+
+
 int main(void) {
-    TestSingleLinkedList();
+    // TestSingleLinkedList();
+    // TestReserved();
+    // f();
+    // TestMergeTwoList();
+    TestMergeSeq();
 
     return 0;
 }
