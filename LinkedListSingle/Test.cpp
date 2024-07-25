@@ -99,6 +99,7 @@ void TestMergeTwoList() {
 void TestMergeSeq() {
     SingleLinkedList * ListA = new SingleLinkedList();
     SingleLinkedList * ListB = new SingleLinkedList();
+    SingleLinkedList * ListC = new SingleLinkedList();
 
     ListA->Init();
     ListB->Init();
@@ -114,9 +115,14 @@ void TestMergeSeq() {
     ListB->PushBack(6);
     ListB->PushBack(6);
 
-    ListA->MergeSeq(ListA, ListB);
 
+
+    ListC = ListA->MergeSeq(ListA, ListB);
+
+    ListC->Print();
+    cout << "AB\n";
     ListA->Print();
+    ListB->Print();
 }
 
 

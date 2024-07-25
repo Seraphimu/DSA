@@ -53,5 +53,5 @@ public:
     void DeleteNode(Node * Target);
     //合并两个链表
     Node * MergeInBetween(Node * ListA, Node * ListB, int a, int b);
-    Node * MergeSeq(SingleLinkedList *& ListA, SingleLinkedList *& ListB);
+    SingleLinkedList * MergeSeq(SingleLinkedList *& ListA, SingleLinkedList *& ListB);
 };
