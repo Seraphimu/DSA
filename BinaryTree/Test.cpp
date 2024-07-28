@@ -12,6 +12,10 @@ void Test() {
     bt->postOrderTraverse();
     cout << "levelOrder:";
     bt->levelOrderTraverse();
+    cout << "Leaf:\n";
+    bt->printLeafNode();
+
+    bt->treeHeight();
 
 
     bt->MakeEmpty();

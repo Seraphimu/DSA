@@ -12,6 +12,13 @@ Node * BT::buyNode(DataType x) {
 }
 
 void BT::createManual() {
+    // root = buyNode(0);
+    // Node * node_1 = buyNode(1);
+    // Node * node_2 = buyNode(2);
+    // root->left = node_1;
+    // root->right = node_2;
+
+
     root = buyNode(0);
 
     Node * node_1 = buyNode(1);
@@ -161,12 +168,42 @@ void BT::MakeEmpty() {
     MakeEmpty(root);
 }
 
+void BT::printLeafNode(const Node * root) {
+    if (root == nullptr) {
+        return;
+    }
+    else {
+        if (root->left == nullptr && root->right == nullptr) {
+            cout << root->data << " ";
+        }
+        else {
+            printLeafNode(root->left);
+            printLeafNode(root->right);
+        }
+    }
+}
 
+void BT::printLeafNode() {
+    printLeafNode(root);
+    cout << "\n";
+}
 
+int BT::treeHeight(const Node * root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    else {
+        int leftHeight = treeHeight(root->left);
+        int rightHeight = treeHeight(root->right);
+        
+        //返回较大者
+        return leftHeight > rightHeight ? leftHeight: rightHeight + 1;
+    }
+}
 
-
-
-
-
-
+void BT::treeHeight() {
+    cout << "Tree Height:\n";
+    cout << treeHeight(root);
+    cout << "\n";
+}
 

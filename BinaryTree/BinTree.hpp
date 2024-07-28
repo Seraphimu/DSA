@@ -26,6 +26,10 @@ private:
     void levelOrderTraverse(const Node * root);
     //置空
     void MakeEmpty(const Node * root);
+    //打印叶子节点
+    void printLeafNode(const Node * root);
+    //求树高
+    int treeHeight(const Node * root);
 public:
     //初始化
     BinaryTree() {
@@ -43,6 +47,10 @@ public:
     void postOrderTraverse();
     //层序遍历
     void levelOrderTraverse();
+    //打印叶子节点
+    void printLeafNode();
+    //求树高
+    void treeHeight();
 
     //置空
     void MakeEmpty();
