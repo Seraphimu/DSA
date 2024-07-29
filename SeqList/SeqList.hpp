@@ -28,6 +28,8 @@ public:
     DataType SearchByPos(int Pos);
     DataType GetMax();
     DataType GetMin();
+    //借助哨兵位查找元素
+    int searchBySentinelPos(DataType target);
 
     //修改S
     void ModifyByValue(DataType NowValue, DataType NewValue);
