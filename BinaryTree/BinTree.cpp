@@ -62,6 +62,30 @@ void BT::preOrderTraverse() {
     cout << "\n";
 }
 
+void BT::preOrderTraverseIter(Node * root) {
+    Node * cur = root;
+    stack<Node *> st;
+    //栈不空，或者树不空
+    while (cur != nullptr || !st.empty()) {
+        while (cur != nullptr) {
+            cout << cur->data << " ";
+            st.push(cur);
+            cur = cur->left;
+        }
+        if (!st.empty()) {
+            cur = st.top();
+            st.pop();
+            cur = cur->right;
+        }
+    }
+}
+
+void BT::preOrderTraverseIter() {
+    cout << "Iter preOrder:\n";
+    preOrderTraverseIter(root);
+    cout << "\n";
+}
+
 
 void BT::inOrderTraverse(const Node * root) {
     if (root == nullptr) {

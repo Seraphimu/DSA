@@ -17,6 +17,7 @@ void Test() {
 
     bt->treeHeight();
 
+    bt->preOrderTraverseIter();
 
     bt->MakeEmpty();
 }

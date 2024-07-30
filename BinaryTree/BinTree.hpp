@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ private:
     Node * root;
     //前序遍历
     void preOrderTraverse(const Node * root);
+    void preOrderTraverseIter(Node * root);
     //中序遍历
     void inOrderTraverse(const Node * root);
     //后序遍历
@@ -41,6 +43,7 @@ public:
     void createManual();
     //前序遍历
     void preOrderTraverse();
+    void preOrderTraverseIter();
     //中序遍历
     void inOrderTraverse();
     //后序遍历
@@ -51,6 +54,7 @@ public:
     void printLeafNode();
     //求树高
     void treeHeight();
+
 
     //置空
     void MakeEmpty();
