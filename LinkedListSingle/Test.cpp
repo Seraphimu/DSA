@@ -126,12 +126,31 @@ void TestMergeSeq() {
 }
 
 
+void Test() {
+    SingleLinkedList * SL = new SingleLinkedList();
+
+    SL->PushBack(1);
+    SL->PushBack(1);
+    SL->PushBack(4);
+    SL->PushBack(5);
+    SL->PushBack(1);
+    SL->PushBack(4);
+
+    SL->RemoveListNode(SL->GetHead()->Next->Next);
+
+
+    SL->Print();
+    SL->MakeEmpty();
+}
+
 int main(void) {
     // TestSingleLinkedList();
     // TestReserved();
     // f();
     // TestMergeTwoList();
-    TestMergeSeq();
+    // TestMergeSeq();
+
+    Test();
 
     return 0;
 }

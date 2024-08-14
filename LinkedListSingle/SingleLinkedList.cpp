@@ -451,3 +451,17 @@ SingleLinkedList * SingleLinkedList::MergeSeq(SingleLinkedList *& ListA, SingleL
     
     return ListC;
 }
+
+void SingleLinkedList::RemoveListNode(Node * Target) {
+    //用一个二级指针指向头指针的指针
+    Node ** Indirect = &Head;
+    //遍历，直到Indirect指向目标的指针
+    while (*Indirect != Target) {
+        Indirect = &(*Indirect)->Next;
+    }
+    Node * tmp = *Indirect;
+    *Indirect = Target->Next;
+
+    free(tmp);
+    tmp = nullptr;
+} 

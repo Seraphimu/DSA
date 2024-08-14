@@ -54,4 +54,6 @@ public:
     //合并两个链表
     Node * MergeInBetween(Node * ListA, Node * ListB, int a, int b);
     SingleLinkedList * MergeSeq(SingleLinkedList *& ListA, SingleLinkedList *& ListB);
+
+    void RemoveListNode(Node * Target);
 };
