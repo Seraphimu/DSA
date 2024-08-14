@@ -35,6 +35,8 @@ class VNode {
 private:
     // 存放顶点要存放的数据
     DataType data;
+    //访问信息（遍历时用
+    bool visited;
     // 指向邻接顶点的指针
     ENode * firstEdge;
     friend class ENode;
@@ -42,6 +44,7 @@ private:
 public:
     VNode(DataType x) {
         data = x;
+        visited = false;
         firstEdge = nullptr;
     }
 };
@@ -65,4 +68,7 @@ public:
     void createGraph();
     //打印图
     void disGraph();
+    //遍历
+    void BFS();
+    void DFS();
 };

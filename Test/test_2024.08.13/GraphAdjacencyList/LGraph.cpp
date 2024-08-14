@@ -51,3 +51,12 @@ void Graph::disGraph() {
         cout << "\n";
     }
 }
+
+
+void Graph::BFS() {
+
+}
+
+void Graph::DFS() {
+
+}
