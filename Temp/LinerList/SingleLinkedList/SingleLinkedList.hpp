@@ -36,4 +36,13 @@ public:
 
     //判空
     bool isEmpty();
+
+    //算法题
+
+    //反转链表
+    Node * reverseList();
+    //返回倒数第k个节点的值
+    DataType kthToLast(int k);
+    //
+    void deleteNode(Node * node);
 }SL;

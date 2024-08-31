@@ -151,3 +151,87 @@ void SL::deleteThisPos(int pos) {
 bool SL::isEmpty() {
     return head == nullptr;
 }
+
+
+Node * SL::reverseList() {
+    if (head == nullptr) {
+        return head;
+    }
+    Node * p, * q, * tmp;
+    p = nullptr;
+    q = head;
+    tmp = q->next;
+
+    //处理前n-1个节点
+    while (tmp) {
+        q->next = p;
+        p = q;
+        q = tmp;
+        tmp = tmp->next;
+    }
+    //处理第n个节点
+    q->next = p;
+
+    return q;
+}
+
+
+DataType SL::kthToLast(int k) {
+    //双指针
+    Node * p;
+    Node * q;
+    p = q = head;
+
+    //思路：双指针
+    //让前指针p先走k步
+    //再让q指针和p指针一起走到空
+    //p要走len - k步才能走到空
+    //即让q跟着p走len - k步，即可返回倒数第k个节点
+    
+    //让p走k步
+    while (k > 0) {
+        k--;
+        p = p->next;
+    }
+
+    //p和q一起走len-k步
+    while (p) {
+        p = p->next;
+        q = q->next;
+    }
+
+    return q->data;
+
+    // // 先求长再走
+    // Node * p;
+    // Node * q;
+    // p = q = head;
+    // //求链表长度
+    // int len = 0;
+    // while (p) {
+    //     p = p->next;
+    //     len++;
+    // }
+
+    // //返回倒数第k个就是指针走len - k步
+    // //链表从头指针走到空要走len步
+    // //返回倒1用len - 1
+    // //返回倒k用len - k
+    // for (int i = 0; i < len - k; i++) {
+    //     q = q->next;
+    // }
+
+    // return q->data;
+}
+
+
+void SL::deleteNode(Node * node) {
+    Node * tmp = node->next;
+    //思路：把node的后继节点的数据拷贝至node中，然后把node->next给删除掉
+    //换数据
+    node->data = tmp->data;
+    //指针向后指
+    node->next = tmp->next;
+    delete tmp;
+    tmp = nullptr;
+}
