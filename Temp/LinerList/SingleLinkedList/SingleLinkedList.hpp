@@ -40,7 +40,7 @@ public:
     //算法题
 
     //反转链表
-    Node * reverseList();
+    SingleLinkedList * reverseList();
     //返回倒数第k个节点的值
     DataType kthToLast(int k);
     //

@@ -153,26 +153,40 @@ bool SL::isEmpty() {
 }
 
 
-Node * SL::reverseList() {
+SL * SL::reverseList() {
     if (head == nullptr) {
-        return head;
+        return nullptr;
     }
-    Node * p, * q, * tmp;
-    p = nullptr;
-    q = head;
-    tmp = q->next;
+    Node * cur = head;
+    SL * newList = new SL();
 
-    //处理前n-1个节点
-    while (tmp) {
-        q->next = p;
-        p = q;
-        q = tmp;
-        tmp = tmp->next;
+    while (cur) {
+        newList->pushFront(cur->data);
+        cur = cur->next;
     }
-    //处理第n个节点
-    q->next = p;
+    
+    return newList;
 
-    return q;
+
+    // if (head == nullptr) {
+    //     return head;
+    // }
+    // Node * p, * q, * tmp;
+    // p = nullptr;
+    // q = head;
+    // tmp = q->next;
+
+    // //处理前n-1个节点
+    // while (tmp) {
+    //     q->next = p;
+    //     p = q;
+    //     q = tmp;
+    //     tmp = tmp->next;
+    // }
+    // //处理第n个节点
+    // q->next = p;
+
+    // return q;
 }
 
 

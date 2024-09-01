@@ -14,13 +14,17 @@ void test() {
     ps->pushBack(4);
     ps->pushBack(5);
 
+    SL * newList = ps->reverseList();
+
     // ps->insertThisPos(0, 114514);
 
-    ps->deleteThisPos(0);
-    ps->deleteThisPos(1);
-    ps->deleteThisPos(2);
-    ps->deleteThisPos(2);
-
+    // ps->deleteThisPos(0);
+    // ps->deleteThisPos(1);
+    // ps->deleteThisPos(2);
+    // ps->deleteThisPos(2);
+    cout << "newList:\n";
+    newList->makeEmpty();
+    cout << "ps:\n";
     ps->makeEmpty();
 }
 
