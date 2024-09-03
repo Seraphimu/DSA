@@ -127,3 +127,18 @@ void SL::makeEmpty() {
     delete data;
     data = nullptr;
 }
+
+void SL::insertionSort() {
+    int i;
+    int j;
+    DataType tmp;
+    for (i = 1; i < size; i++) {
+        tmp = data[i];
+        //前移
+        for (j = i; j > 0 && data[j - 1] > tmp; j--) {
+            data[i] = data[i - 1];
+        }
+        //植入
+        data[i] = tmp;
+    }
+}

@@ -3,12 +3,12 @@
 void test() {
     SL * s = new SL();
 
-    s->pushBack(1);
+    s->pushBack(100);
     s->pushBack(2);
-    s->pushBack(3);
-    s->pushBack(4);
+    s->pushBack(-3);
+    s->pushBack(40);
     s->pushBack(5);
-    s->pushBack(6);
+    s->pushBack(-10);
     
     cout << "prev operation: \n";
     s->print();
@@ -33,8 +33,10 @@ void test() {
     //     cout << "looking for " << i << " " << s->searchByPos(i) << "\n";
     // }
 
-    cout << s->searchByValue(114514) << "\n";
-    cout << s->searchByValue(5) << "\n";
+    // cout << s->searchByValue(114514) << "\n";
+    // cout << s->searchByValue(5) << "\n";
+
+    s->insertionSort();
 
     cout << "after operation: \n";
     s->print();

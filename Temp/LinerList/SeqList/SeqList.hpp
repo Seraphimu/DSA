@@ -24,6 +24,9 @@ public:
     //按值查找，返回下标
     int searchByValue(DataType target);
 
+    //排序
+    void insertionSort();
+
     //为满时返回真
     bool isFull();
     //为空返回真
