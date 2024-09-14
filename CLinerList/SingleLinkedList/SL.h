@@ -15,4 +15,4 @@ void SLInit(Node ** PPHead);
 Node * SLBuyNode(DataType x);
 
 //头插法
-void SLPushBack(Node ** PPHead, DataType x);
+void SLPushFront(Node ** PPHead, DataType x);

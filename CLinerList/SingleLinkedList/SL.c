@@ -21,7 +21,7 @@ Node * SLBuyNode(DataType x) {
 }
 
 //头插法
-void SLPushBack(Node ** PPHead, DataType x) {
+void SLPushFront(Node ** PPHead, DataType x) {
 	//分配节点
 	Node * newNode = SLBuyNode(x);
 	//新节点指针域指向头指针
