@@ -49,35 +49,7 @@ void Graph::disGraph() {
     cout << "\n";
 }
 
-void Graph::DFS() {
-    //建立一个存放顶点下标的栈
-    stack<int> s;
-    //处理第一个顶点
-    cout << lsitVertices[0]->data << " ";
-    lsitVertices[0]->visited = true;
-    s.push(0);
 
-    int unVisited;
-    //直至栈空为止
-    while (!s.empty()) {
-        //扫描与栈顶元素有边的顶点,有就返回下标,没有就返回-1
-        unVisited = getUnvisited(s.top());
-        //没有任何顶点与当前顶点有边,则出栈
-        if (unVisited == -1) {
-            s.pop();
-        }
-        //有边则打印、进栈、打访问标记
-        else {
-            cout << lsitVertices[unVisited]->data << " ";
-            lsitVertices[unVisited]->visited = true;
-            s.push(unVisited);
-        }
-    }
-
-    for (int i = 0; i < cntVertices; i++) {
-        lsitVertices[i]->visited = false;
-    }
-}
 
 void Graph::BFS() {
     //创建一个存放顶点下标的队列
@@ -118,6 +90,31 @@ int Graph::getUnvisited(int index) {
 }
 
 
+void Graph::DFS() {
+    //建立一个栈，存放顶点下标
+    stack<int> * s = new stack<int>;
+    //处理第一个顶点
+    cout << lsitVertices[0]->data << " ";
+    lsitVertices[0]->visited = true;
+    s->push(0);
+
+    int unVisited;
+    while (!s->empty()) {
+        unVisited = getUnvisited(s->top());
+        if (unVisited == -1) {
+            s->pop();
+        }
+        else {
+            s->push(unVisited);
+            cout << lsitVertices[unVisited]->data << " ";
+            lsitVertices[unVisited]->visited = true;
+        }
+    }
+    //不改回来会影响同一个程序中的其他遍历算法
+    for (int i = 0; i < cntVertices; i++) {
+        lsitVertices[i]->visited = false;
+    }
+}
 
 
 
@@ -129,6 +126,36 @@ int Graph::getUnvisited(int index) {
 
 
 
+
+// void Graph::DFS() {
+//     //建立一个存放顶点下标的栈
+//     stack<int> s;
+//     //处理第一个顶点
+//     cout << lsitVertices[0]->data << " ";
+//     lsitVertices[0]->visited = true;
+//     s.push(0);
+
+//     int unVisited;
+//     //直至栈空为止
+//     while (!s.empty()) {
+//         //扫描与栈顶元素有边的顶点,有就返回下标,没有就返回-1
+//         unVisited = getUnvisited(s.top());
+//         //没有任何顶点与当前顶点有边,则出栈
+//         if (unVisited == -1) {
+//             s.pop();
+//         }
+//         //有边则打印、进栈、打访问标记
+//         else {
+//             cout << lsitVertices[unVisited]->data << " ";
+//             lsitVertices[unVisited]->visited = true;
+//             s.push(unVisited);
+//         }
+//     }
+
+//     for (int i = 0; i < cntVertices; i++) {
+//         lsitVertices[i]->visited = false;
+//     }
+// }
 
 
 
